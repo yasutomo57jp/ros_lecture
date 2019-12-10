@@ -3,4 +3,4 @@ int32 MIDI = 3
 int32 mode
 int32 effect_id
 int32 volume
-toio_msgs/Note[] notes
+toio_lecture/Note[] notes

@@ -5,7 +5,7 @@ import rospy
 import rosparam
 from std_msgs.msg import Int32, Float32, ColorRGBA
 from geometry_msgs.msg import Twist, PoseStamped
-from toio_msgs.msg import *
+from toio_lecture.msg import *
 from bluepy import btle
 import math
 
