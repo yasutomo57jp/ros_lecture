@@ -20,18 +20,18 @@ void TurretPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf){
 }
 
 void TurretPlugin::OnUpdate() {
-  common::Time current_time = world_->GetSimTime();
+  common::Time current_time = world_->SimTime();
   if((current_time - last_time_).Double() > (1.0/2.0)){
       last_time_ = current_time;
-      ignition::math::Pose3d pose = this->link_->GetWorldPose().Ign();
+      ignition::math::Pose3d pose = this->link_->WorldPose();
       printf("pos: %f %f %f\n", pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z());
       printf("rot: %f %f %f\n", pose.Rot().Roll(), pose.Rot().Pitch(), pose.Rot().Yaw());
   }  
 
   auto yaw = model_->GetJoint(yaw_joint_name_);
-  yaw->SetVelocity(0, -yaw_p_ * (yaw->GetAngle(0).Radian() - yaw_target_));  
+  yaw->SetVelocity(0, -yaw_p_ * (yaw->Position(0) - yaw_target_));  
   auto pitch = model_->GetJoint(pitch_joint_name_);
-  pitch->SetVelocity(0, -pitch_p_ * (pitch->GetAngle(0).Radian() - pitch_target_));  
+  pitch->SetVelocity(0, -pitch_p_ * (pitch->Position(0) - pitch_target_));  
 }
 
 void TurretPlugin::Reset() {
